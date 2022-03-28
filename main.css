@@ -1,0 +1,93 @@
+.header {
+    width: 100vw;
+    height:50px;
+    background-color: var(--light-color);
+}
+* :not(li, ul) {
+    margin: 0;
+    padding: 0;
+    --light-color: #cccccc;
+    --primary-color: #fcffcb;
+    --primary-selected: #e5ff00;
+    --secondary-color: #e4fffa;
+    font-family: Arial;
+    font-size: 25px;
+}
+li {
+    text-align: left;
+    margin-left: 50vw;
+    transform: translateX(-150px);
+}
+h1 {
+    overflow: visible;
+}
+body {
+    height: 100vh;
+    background-color: #dddddd;
+    text-align: center;
+}
+#selectionZone {
+    width:100%;
+    height:calc(100% - 50px);
+    overflow-y:auto;
+}
+button {
+    width: 300px;
+    height: 50px;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    font-size: 25px;
+}
+.select button, .select h1 {
+    margin-right: 50px;
+    width:300px;
+}
+.select2 button, .select2 h1 {
+    margin-left: 50px;
+    width:300px;
+}
+.select2 h1 {
+    position:absolute;
+    left: 0;
+    top:60px;
+    white-space: nowrap;
+}
+.select h1 {
+    position:absolute;
+    right: 0;
+    top:60px;
+    white-space: nowrap;
+}
+.back {
+    margin-bottom: 50px;
+}
+.select {
+    width: calc(50vw + 200px);
+    height:100%;
+    position: absolute;
+    top:0;
+    background-color: var(--primary-color);
+    transform: translateX(-100%);
+    transition: all 0.5s;
+    opacity: 0;
+}
+.select.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+.select2 {
+    width: calc(50vw + 200px);
+    height:100%;
+    position: absolute;
+    top:0;
+    right:0px;
+    background-color: var(--secondary-color);
+    transform: translateX(100%);
+    transition: all 0.5s;
+    opacity: 0;
+}
+.select2.active {
+    transform: translateX(0);
+    opacity: 1;
+}
