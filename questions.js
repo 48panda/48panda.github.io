@@ -1,3 +1,5 @@
+names = ["a", "b", "c", "d", "e", "f", "g"]
+subjects = ["Maths"]
 getLetters = numLetters => {
     let letters = "abcdefghijklmnopqrstuvwxyz";
     let output = "";
@@ -16,32 +18,71 @@ getRandomInt = (min, max) => {
 getRandomBoolean = () => {
     return Math.random() >= 0.5;
 }
-quizes = [
+getRandomName = () => {
+    return names[getRandomInt(0, names.length)]
+}
+getRandomSubject = () => {
+    return subjects[getRandomInt(0, subjects.length)]
+}
+quizes = 
+[
     {
-        name: "Collecting Like Terms 1",
-        id: "collecting-like-terms-1",
-        path: ["Algebra", "Like Terms"],
+        name: "",
+        id: "",
+        path: ["", ""],
         index: 0,
-        url: "wT0ajlmTq38",
-        similar: [406,407],
+        url: "", // TODO: UPLOAD AND CHANGE
+        similar: [406],
         question: () => {
-                number_of_letters = getRandomBoolean() ? 2 : 3;
-                let letters = getLetters(number_of_letters);
-                let coeffients = [];
-                let range = []
-                if (number_of_letters == 2) {
-                    coefficients = [0,0,0,0]
-                    range = [0,1,2,3]
-                } else {
-                    coefficients = [0,0,0,0,0,0]
-                    range = [0,1,2,3,4,5]
-                }
-                coeffients = coefficients.map(() => getRandomInt(2, 11));
-                letters = letters + letters
-                return {question:`Collect the like terms of $${range.map(i=>`${coeffients[i]}${letters[i]}`).join(" + ")}$`,checkAnswer:answer=>{
-                    return true
-                }}
+            let numberOfNumbers = getRandomInt(3, 7);
+            let numbers = []
+            let range = getRandomInt(200, 900) * 100
+            for (let i=0; i < numberOfNumbers-1; i++) {
+                numbers.push(getRandomInt(range, range + 100))
             }
-
+            let partialSum = numbers.reduce((a,b)=>a+b)
+            let mean = getRandomInt(Math.min(...numbers), Math.max(...numbers))
+            numbers.push((mean * numberOfNumbers) - partialSum)
+            return {question:`Calculate the mean of this set of data:\n${numbers}`}
+        }
+    }, {
+        name: "",
+        id: "",
+        path: ["", ""],
+        index: 1,
+        url: "", // TODO: UPLOAD AND CHANGE
+        similar: [406],
+        question: () => {
+            num_rows = getRandomInt(2,5);
+            let x = [];
+            let w = [];
+            w_left = 20
+            for (let i=0;i<num_rows;i++){w.push(1), w_left-=1}
+            for (let i=0; i < w_left; i++) {
+                index = getRandomInt(0, num_rows)
+                w[index] += 1
+            }
+            w=w.map(x=>x/20)
+            for (let i=0; i < num_rows; i++) {
+                x.push(getRandomInt(0,21) * 5)
+            }
+            text = w.map((v,i)=>`Paper ${i+1} makes up ${Math.round(v*100)}%`)
+            paper = x.map((v,i)=>`${v}% on Paper ${i+1}`)
+            s = ""
+            c = 0
+            s2 = ""
+            c2 = 0
+            console.log(text)
+            for(let i of text){if(c==num_rows-1){s+=" and "}else if(c!=0){s+=", "}s+=i;c++}
+            for(let i of paper){if(c2==num_rows-1){s2+=" and "}else if(c2!=0){s2+=", "}s2+=i;c2++}
+            name = getRandomName()
+            return {question:`In ${getRandomSubject()}, There are ${num_rows} papers. ${s}. ${name} got ${s2}. What was ${name}'s percentage across all of the papers?`,
+                checkAnswer:(answer)=>{
+                    fx = x.map((x_,i)=>{w_=w[i];return w_*x_})
+                    correct = fx.reduce((a,b)=>a+b)
+                    return answer==correct
+                }
+            }
+        }
     }
 ]
