@@ -105,4 +105,44 @@ def weightedmean(self, values, weights):
 
 class WeightedMean(Scene):
     def construct(self):
-        weightedmean(self, [1,2,3,4,5], [0.1,0.2,0.2,0.3,0.2])
+        weightedmean(self, [1,2,3,4], [20,10,30,50])
+        weightedmean(self, [80,75,15,65], [15,5,25,20])
+        weightedmean(self, [10,100,0,25], [15,40,20,3])
+
+def deviation(self, a,b,c,d, value):
+    question = Tex(f"Find the deviation of ",str(value)," in the data set:").shift(UP*3)
+    data = Tex(f"{a}",", ",f"{b}",", ",f"{c}",", ",f"{d}").shift(UP*2.5)
+    step1 = Tex("Find the mean").shift(UP*2).scale(0.5)
+    meanFrac1 = MathTex(f"{{",str(a)," + ",str(b)," + ",str(c)," + ",str(d),f" \\over 4 }}").shift(UP)
+    meanFrac2= MathTex(f"{{",str(a+b+c+d),f" \\over 4 }}").shift(UP)
+    meanFrac3= Tex(str(try_int((a+b+c+d)/4))).shift(UP*1.5)
+    step2 = Tex("Subtract the mean from the observation").shift(UP).scale(0.5)
+    meanSub = Tex(str(value), " - ", str(try_int((a+b+c+d)/4)))
+    answer = Tex(str(value - try_int((a+b+c+d)/4)))
+    underline = Underline(answer, color=YELLOW)
+
+    self.play(Write(question), run_time=2)
+    self.play(Write(data), run_time=2)
+    self.play(Write(step1), run_time=2)
+    self.play(TransformMatchingTex(data.copy(), meanFrac1), run_time=2)
+    self.play(TransformMatchingTex(meanFrac1, meanFrac2), run_time=2)
+    self.play(ReplacementTransform(meanFrac2, meanFrac3), run_time=2)
+    self.play(Write(step2), run_time=2)
+    self.play(TransformFromCopy(meanFrac3, meanSub), run_time=3)
+    self.wait(2)
+    self.play(ReplacementTransform(meanSub, answer), run_time=3)
+    self.play(Write(underline), run_time=2)
+    self.wait(5)
+    self.play(FadeOut(question, shift=RIGHT*5),
+                FadeOut(data, shift=RIGHT*5),
+                FadeOut(step1, shift=RIGHT*5),
+                FadeOut(meanFrac3, shift=RIGHT*5),
+                FadeOut(step2, shift=RIGHT*5),
+                FadeOut(answer, shift=RIGHT*5),
+                FadeOut(underline, shift=RIGHT*5), run_time=2)
+
+class Deviation(Scene):
+    def construct(self):
+        deviation(self, 10,13,7,2,13)
+        deviation(self, 102,103,107,104,102)
+        deviation(self, 2048,2022,2019,2011,2022)

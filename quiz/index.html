@@ -13,12 +13,18 @@
     </head>
     <body>
         <div id="header"></div>
-        <h1 id="name"></h1>Video:<div style="width:96vmin;height:54vmin;margin:auto;"><iframe allowfullscreen width="100%" height="100%" id="video"></iframe></div>
-        <div id="similar"></div>
-        Practice:
-        <div id="questions">
+        <h1 id="name"></h1><div id="vidcon" style="width:96vmin;height:54vmin;margin:auto;"><iframe allowfullscreen width="100%" height="100%" id="video"></iframe></div>
+        <div id="similarcontainer">
+            Builds off of:
+            <div id="similar"></div>
+        </div>
+        <button onclick="goButton()" id="go" class="btn-green">GO!</button>
+        <div id="questions" style="display: none;">
             <p id="question">$e$</p>
-            <span id="input"></span><button onclick="questionAnswered()">Submit</button>
+            <span id="input"></span><button id="btn-submit" onclick="questionAnswered()">Submit</button>
+            <div id = "correct">Well done! you got it correct!</div>
+            <div id = "incorrect">Sorry, that's not quite right. The correct answer was: <p id="correctanswer"></p></div>
+            <button id="next" onclick="doQuestion()">Next</button>
         </div>
         <script src="../questions.js"></script>
         <script src="quiz.js"></script>

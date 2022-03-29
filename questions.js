@@ -27,9 +27,9 @@ getRandomSubject = () => {
 quizes = 
 [
     {
-        name: "",
-        id: "",
-        path: ["", ""],
+        name: "Mean of large numbers",
+        id: "mean-of-large-numbers",
+        topic: "stats",
         index: 0,
         url: "", // TODO: UPLOAD AND CHANGE
         similar: [406],
@@ -43,12 +43,12 @@ quizes =
             let partialSum = numbers.reduce((a,b)=>a+b)
             let mean = getRandomInt(Math.min(...numbers), Math.max(...numbers))
             numbers.push((mean * numberOfNumbers) - partialSum)
-            return {question:`Calculate the mean of this set of data:\n${numbers}`}
+            return {question:`Calculate the mean of this set of data:\n${numbers}`,checkAnswer:answer=>answer==mean, answer:mean}
         }
     }, {
-        name: "",
-        id: "",
-        path: ["", ""],
+        name: "Weighted mean",
+        id: "weighted-mean",
+        topic: "stats",
         index: 1,
         url: "", // TODO: UPLOAD AND CHANGE
         similar: [406],
@@ -62,26 +62,23 @@ quizes =
                 index = getRandomInt(0, num_rows)
                 w[index] += 1
             }
-            w=w.map(x=>x/20)
+            w=w.map(x=>x*getRandomInt(1,6))
             for (let i=0; i < num_rows; i++) {
                 x.push(getRandomInt(0,21) * 5)
             }
-            text = w.map((v,i)=>`Paper ${i+1} makes up ${Math.round(v*100)}%`)
-            paper = x.map((v,i)=>`${v}% on Paper ${i+1}`)
-            s = ""
-            c = 0
-            s2 = ""
-            c2 = 0
-            console.log(text)
-            for(let i of text){if(c==num_rows-1){s+=" and "}else if(c!=0){s+=", "}s+=i;c++}
-            for(let i of paper){if(c2==num_rows-1){s2+=" and "}else if(c2!=0){s2+=", "}s2+=i;c2++}
-            name = getRandomName()
-            return {question:`In ${getRandomSubject()}, There are ${num_rows} papers. ${s}. ${name} got ${s2}. What was ${name}'s percentage across all of the papers?`,
+            //text = w.map((v,i)=>`Paper ${i+1} makes up ${Math.round(v*100)}%`)
+            //paper = x.map((v,i)=>`${v}% on Paper ${i+1}`)
+            //console.log(text)
+            text = x.map(x=>`<td>${x}</td>`).join("")
+            paper=w.map(x=>`<td>${x}</td>`).join("")
+            let name = getRandomName()
+            fx = x.map((x_,i)=>{w_=w[i];return w_*x_})
+            correct = fx.reduce((a,b)=>a+b)
+            return {question:`These are ${name}'s test scores. What was ${name}'s mean score?\n<table><tr><th>Score</th>${text}</tr><tr><th>Weight</th>${paper}</tr></table>`,
                 checkAnswer:(answer)=>{
-                    fx = x.map((x_,i)=>{w_=w[i];return w_*x_})
-                    correct = fx.reduce((a,b)=>a+b)
                     return answer==correct
-                }
+                },
+                answer:correct
             }
         }
     }

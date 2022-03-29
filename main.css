@@ -18,8 +18,42 @@ li {
     margin-left: 50vw;
     transform: translateX(-150px);
 }
+table, td, th {  
+    border: 1px solid black;
+    text-align: left;
+}
+td, th {
+    padding: 5px;
+}  
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+table tr:nth-child(odd){background-color: #f2f2f2;}
+table tr:nth-child(even){background-color: #ffffff;}
 h1 {
     overflow: visible;
+}
+.hidden {
+    display: none;
+}
+#questions {
+    display: block;
+    margin: 10vmin;
+    background-color: aliceblue;
+    border-radius: 30px;
+    border: 3px solid lightslategrey;
+    padding:10px;
+}
+#input {
+    margin: 50px;
+    margin-bottom: 10px;
+    width: calc(100% - 100px);
+    background: #ffffff;
+    border-radius: 10px;
+    text-align: left;
+    padding:3px;
+    padding-left:20px;
 }
 body {
     height: 100vh;
@@ -90,4 +124,14 @@ button {
 .select2.active {
     transform: translateX(0);
     opacity: 1;
+}
+.btn-green {
+    background-color: green;
+    border-radius: 15px;
+    border-color: darkgreen;
+}
+.btn-green:hover {
+    background-color: darkgreen;
+    border-color: darkolivegreen;
+    cursor: pointer;
 }
