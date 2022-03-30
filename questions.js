@@ -1,5 +1,11 @@
 names = ["a", "b", "c", "d", "e", "f", "g"]
 subjects = ["Maths"]
+experiments = [
+    {
+        name:"titration",
+        unit:"mol/dm3"
+    }
+]
 getLetters = numLetters => {
     let letters = "abcdefghijklmnopqrstuvwxyz";
     let output = "";
@@ -18,12 +24,17 @@ getRandomInt = (min, max) => {
 getRandomBoolean = () => {
     return Math.random() >= 0.5;
 }
+getRandomExperiment = () => {
+    return experiments[getRandomInt(0, experiments.length)]
+}
 getRandomName = () => {
     return names[getRandomInt(0, names.length)]
 }
 getRandomSubject = () => {
     return subjects[getRandomInt(0, subjects.length)]
 }
+getRandomFloat = (min, max, divs)=>getRandomInt(min*divs, max*divs)/divs
+
 quizes = 
 [
     {
@@ -80,6 +91,24 @@ quizes =
                 },
                 answer:correct
             }
+        }
+    }, {
+        name: "",
+        id: "",
+        topic: "",
+        index: 2,
+        url: "",
+        similar: [],
+        question: () => {
+            center = getRandomInt(1, 100)
+            a = getRandomFloat(center - 5, center + 5, 10)
+            b = getRandomFloat(center - 5, center + 5, 10)
+            c = getRandomFloat(center - 5, center + 5, 10)
+            d = getRandomFloat(center - 5, center + 5, 10)
+            e = getRandomFloat(center - 5, center + 5, 10)
+            mean = (a+b+c+d+e)/5
+            de = e - mean
+            return {question: `${getRandomName} DATA THINGY HERE ${a}, ${b}, ${c} ${d}.\n The last DATA THINGY HERE was ${e}.\ncCalculate the devaition of the LAST DATATHINGY HERE in the dataset.`}
         }
     }
 ]
