@@ -1,15 +1,68 @@
+* {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
 .header {
     width: 100vw;
     height:50px;
-    background-color: var(--light-color);
+    background-color: rgba(0,0,0, 0.1);
+}
+a.logo {
+    height: 40px;
+    float: left;
+    padding: 5px;
+    display: block;
+}
+img.logo {
+    height:100%
+}
+.container-list {
+    width: fit-content;
+    margin: auto;
+}
+a.btn {
+    height: 30px;
+    margin: 5px;
+    padding: 2px;
+    border-radius: 10px;
+    float: left;
+    color: black;
+    text-decoration: none;
+    transition: 0.3s;
+    position: relative;
+}
+a.btn:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    visibility: hidden;
+    transition: all 0.5s ease-in-out;
+}
+a.btn:hover:before {
+  visibility: visible;
+  width: 100%;
+}
+a.btn:hover {
+    background-color: rgba(255,255,255, 0.3);
+}
+.inner-header {
+    width: 95vw;
+    height:50px;
+    background-color: rgba(0,0,0,0);
+    margin: auto;
+    border-bottom: var(--primary-color) solid 3px;
 }
 * :not(li, ul) {
     margin: 0;
     padding: 0;
     --light-color: #cccccc;
-    --primary-color: #fcffcb;
-    --primary-selected: #e5ff00;
-    --secondary-color: #e4fffa;
+    --primary-color: #ff00ff;
+    --primary-selected: #800080;
+    --secondary-color: #808000;
     font-family: Arial;
     font-size: 25px;
 }
@@ -39,11 +92,30 @@ h1 {
 }
 #questions {
     display: block;
-    margin: 10vmin;
-    background-color: aliceblue;
+    margin: 2vmin;
+    background-color: rgba(255,255,255, 0.8);
     border-radius: 30px;
-    border: 3px solid lightslategrey;
+    border: 3px solid var(--primary-color);
     padding:10px;
+    height: calc(100vh - 220px);
+}
+#questions.correct {
+    background-color: rgb(224, 255, 224);
+    border-color: rgb(0, 255, 0);
+}
+#questions.incorrect {
+    background-color: rgb(255, 224, 224);
+    border-color: rgb(255, 0, 0);
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 #input {
     margin: 50px;
@@ -134,4 +206,33 @@ button {
     background-color: darkgreen;
     border-color: darkolivegreen;
     cursor: pointer;
+}
+.question-box {
+    display: inline;
+    background-color: aliceblue;
+    border: lightslategray solid 3px;
+    margin:3px;
+    padding:3px;
+    border-radius: 20px;
+}
+.question-box.current{
+    background-color: rgb(176, 218, 255);
+    border-color: rgb(50, 102, 155);
+}
+.question-box.wrong{
+    background-color: rgb(255, 176, 176);
+    border-color: rgb(155, 50, 50);
+}
+.question-box.correct{
+    background-color: rgb(185, 255, 176);
+    border-color: rgb(59, 155, 50);
+}
+#questionprogress {
+    border: var(--primary-color) solid 3px;
+    padding: 15px;
+    margin: 5px 2vmin;
+    background-color: rgba(255,255,255, 0.7);
+    overflow-x: scroll;
+    overflow-y: hidden;
+    border-radius: 10px 10px 0 0;
 }

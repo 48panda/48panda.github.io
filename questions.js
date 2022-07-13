@@ -1,114 +1,392 @@
-names = ["a", "b", "c", "d", "e", "f", "g"]
-subjects = ["Maths"]
-experiments = [
-    {
-        name:"titration",
-        unit:"mol/dm3"
-    }
-]
-getLetters = numLetters => {
-    let letters = "abcdefghijklmnopqrstuvwxyz";
-    let output = "";
-    for (let i = 0; i < numLetters; i++) {
-        index = Math.floor(Math.random() * letters.length);
-        output += letters[index];
-        letters = letters.slice(0, index) + letters.slice(index + 1);
-    }
-    return output;
-}
+names = ["Jeff"]
 getRandomInt = (min, max) => {
     min = Math.ceil(min);
-    max = Math.floor(max);
+    max = Math.floor(max+1);
     return Math.floor(Math.random() * (max - min)) + min;
+}
+roundFloat = (float, dp) => {
+    return Math.round(float * Math.pow(10, dp)) / Math.pow(10, dp);
 }
 getRandomBoolean = () => {
     return Math.random() >= 0.5;
 }
-getRandomExperiment = () => {
-    return experiments[getRandomInt(0, experiments.length)]
-}
 getRandomName = () => {
     return names[getRandomInt(0, names.length)]
-}
-getRandomSubject = () => {
-    return subjects[getRandomInt(0, subjects.length)]
 }
 getRandomFloat = (min, max, divs)=>getRandomInt(min*divs, max*divs)/divs
 
 quizes = 
 [
     {
-        name: "Mean of large numbers",
-        id: "mean-of-large-numbers",
+        name: "Deviaition",
+        id: "deviaition",
         topic: "stats",
         index: 0,
-        url: "", // TODO: UPLOAD AND CHANGE
-        similar: [406],
-        question: () => {
-            let numberOfNumbers = getRandomInt(3, 7);
-            let numbers = []
-            let range = getRandomInt(200, 900) * 100
-            for (let i=0; i < numberOfNumbers-1; i++) {
-                numbers.push(getRandomInt(range, range + 100))
+        questions:[
+            () => {
+                a = getRandomFloat(1, 10, 1);
+                b = getRandomFloat(1, 10, 1);
+                c = getRandomFloat(1, 10, 1);
+                f = [a,b,c,][getRandomInt(0, 2)];
+                return {question: `Find the deviation of (*${f}*) in the dataset below. \n (*${a}*), (*${b}*), (*${c}*)\n Round to 2dp if needed.`,
+                    answer: roundFloat(f - ((a+b+c)/3), 2),qnum:0
+                }
             }
-            let partialSum = numbers.reduce((a,b)=>a+b)
-            let mean = getRandomInt(Math.min(...numbers), Math.max(...numbers))
-            numbers.push((mean * numberOfNumbers) - partialSum)
-            return {question:`Calculate the mean of this set of data:\n${numbers}`,checkAnswer:answer=>answer==mean, answer:mean}
-        }
-    }, {
-        name: "Weighted mean",
-        id: "weighted-mean",
+            ,() => {
+                a = getRandomFloat(1, 10, 1);
+                b = getRandomFloat(1, 10, 1);
+                c = getRandomFloat(1, 10, 1);
+                f = [a,b,c,][getRandomInt(0, 2)];
+                return {question: `Find the deviation of (*${f}*) in the dataset below. \n (*${a}*), (*${b}*), (*${c}*)\n Round to 2dp if needed.`,
+                    answer: roundFloat(f - ((a+b+c)/3), 2),qnum:1
+                }
+            }
+            ,() => {
+                a = getRandomFloat(1, 10, 1);
+                b = getRandomFloat(1, 10, 1);
+                c = getRandomFloat(1, 10, 1);
+                d = getRandomFloat(1, 10, 1);
+                e = getRandomFloat(1, 10, 1);
+                f = [a,b,c,d,e][getRandomInt(0, 4)];
+                return {question: `Find the deviation of (*${f}*) in the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*)`,
+                    answer: roundFloat(f - ((a+b+c+d+e)/5), 5),qnum:2
+                }
+            }
+            ,() => {
+                a = getRandomFloat(1, 10, 1);
+                b = getRandomFloat(1, 10, 1);
+                c = getRandomFloat(1, 10, 1);
+                d = getRandomFloat(1, 10, 1);
+                e = getRandomFloat(1, 10, 1);
+                f = [a,b,c,d,e][getRandomInt(0, 4)];
+                return {question: `Find the deviation of (*${f}*) in the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*)`,
+                    answer: roundFloat(f - ((a+b+c+d+e)/5), 5),qnum:3
+                }
+            }
+            ,() => {
+                a = getRandomFloat(1, 10, 10);
+                b = getRandomFloat(1, 10, 10);
+                c = getRandomFloat(1, 10, 10);
+                d = getRandomFloat(1, 10, 10);
+                e = getRandomFloat(1, 10, 10);
+                f = [a,b,c,d,e][getRandomInt(0, 4)];
+                return {question: `Find the deviation of (*${f}*) in the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*)`,
+                    answer: roundFloat(f - ((a+b+c+d+e)/5), 5),qnum:4
+                }
+            }
+            ,() => {
+                a = getRandomFloat(1, 10, 10);
+                b = getRandomFloat(1, 10, 10);
+                c = getRandomFloat(1, 10, 10);
+                d = getRandomFloat(1, 10, 10);
+                e = getRandomFloat(1, 10, 10);
+                f = [a,b,c,d,e][getRandomInt(0, 4)];
+                return {question: `Find the deviation of (*${f}*) in the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*)`,
+                    answer: roundFloat(f - ((a+b+c+d+e)/5), 5),qnum:5
+                }
+            }
+            ,() => {
+                a = getRandomFloat(1, 100, 10);
+                b = getRandomFloat(1, 100, 10);
+                c = getRandomFloat(1, 100, 10);
+                d = getRandomFloat(1, 100, 10);
+                e = getRandomFloat(1, 100, 10);
+                f = [a,b,c,d,e][getRandomInt(0, 4)];
+                return {question: `Find the deviation of (*${f}*) in the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*)`,
+                    answer: roundFloat(f - ((a+b+c+d+e)/5), 5),qnum:6
+                }
+            }
+            ,() => {
+                a = getRandomFloat(1, 100, 10);
+                b = getRandomFloat(1, 100, 10);
+                c = getRandomFloat(1, 100, 10);
+                d = getRandomFloat(1, 100, 10);
+                e = getRandomFloat(1, 100, 10);
+                f = [a,b,c,d,e][getRandomInt(0, 4)];
+                return {question: `Find the deviation of (*${f}*) in the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*)`,
+                    answer: roundFloat(f - ((a+b+c+d+e)/5), 5),qnum:7
+                }
+            }
+     ]
+    },
+    {
+        name: "Variance",
+        id: "variance",
         topic: "stats",
         index: 1,
-        url: "", // TODO: UPLOAD AND CHANGE
-        similar: [406],
-        question: () => {
-            num_rows = getRandomInt(2,5);
-            let x = [];
-            let w = [];
-            w_left = 20
-            for (let i=0;i<num_rows;i++){w.push(1), w_left-=1}
-            for (let i=0; i < w_left; i++) {
-                index = getRandomInt(0, num_rows)
-                w[index] += 1
-            }
-            w=w.map(x=>x*getRandomInt(1,6))
-            for (let i=0; i < num_rows; i++) {
-                x.push(getRandomInt(0,21) * 5)
-            }
-            //text = w.map((v,i)=>`Paper ${i+1} makes up ${Math.round(v*100)}%`)
-            //paper = x.map((v,i)=>`${v}% on Paper ${i+1}`)
-            //console.log(text)
-            text = x.map(x=>`<td>${x}</td>`).join("")
-            paper=w.map(x=>`<td>${x}</td>`).join("")
-            let name = getRandomName()
-            fx = x.map((x_,i)=>{w_=w[i];return w_*x_})
-            correct = fx.reduce((a,b)=>a+b)
-            return {question:`These are ${name}'s test scores. What was ${name}'s mean score?\n<table><tr><th>Score</th>${text}</tr><tr><th>Weight</th>${paper}</tr></table>`,
-                checkAnswer:(answer)=>{
-                    return answer==correct
-                },
-                answer:correct
-            }
-        }
-    }, {
-        name: "",
-        id: "",
-        topic: "",
+        questions: [
+            () => {
+                a = getRandomFloat(1, 10, 1);
+                b = getRandomFloat(1, 10, 1);
+                c = getRandomFloat(1, 10, 1);
+                return {question: `Find the variance of the dataset below. \n (*${a}*), (*${b}*), (*${c}*) \n\n  give your answer to 2dp`,
+                    answer: roundFloat((a**2+b**2+c**2)/3 - ((a+b+c)/3)**2, 2),qnum:0
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 10, 1);
+                b = getRandomFloat(1, 10, 1);
+                c = getRandomFloat(1, 10, 1);
+                return {question: `Find the variance of the dataset below. \n (*${a}*), (*${b}*), (*${c}*) \n\n  give your answer to 2dp`,
+                    answer: roundFloat((a**2+b**2+c**2)/3 - ((a+b+c)/3)**2, 2),qnum:1
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 10, 1);
+                b = getRandomFloat(1, 10, 1);
+                c = getRandomFloat(1, 10, 1);
+                d = getRandomFloat(1, 10, 1);
+                e = getRandomFloat(1, 10, 1);
+                return {question: `Find the variance of the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*) \n\n  give your answer to 2dp`,
+                    answer: roundFloat((a**2+b**2+c**2+d**2+e**2)/5 - ((a+b+c+d+e)/5)**2, 2),qnum:2
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 10, 1);
+                b = getRandomFloat(1, 10, 1);
+                c = getRandomFloat(1, 10, 1);
+                d = getRandomFloat(1, 10, 1);
+                e = getRandomFloat(1, 10, 1);
+                return {question: `Find the variance of the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*) \n\n  give your answer to 2dp`,
+                    answer: roundFloat((a**2+b**2+c**2+d**2+e**2)/5 - ((a+b+c+d+e)/5)**2, 2),qnum:3
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 10, 10);
+                b = getRandomFloat(1, 10, 10);
+                c = getRandomFloat(1, 10, 10);
+                d = getRandomFloat(1, 10, 10);
+                e = getRandomFloat(1, 10, 10);
+                return {question: `Find the variance of the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*) \n\n  give your answer to 2dp`,
+                    answer: roundFloat((a**2+b**2+c**2+d**2+e**2)/5 - ((a+b+c+d+e)/5)**2, 2),qnum:4
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 10, 10);
+                b = getRandomFloat(1, 10, 10);
+                c = getRandomFloat(1, 10, 10);
+                d = getRandomFloat(1, 10, 10);
+                e = getRandomFloat(1, 10, 10);
+                return {question: `Find the variance of the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*) \n\n  give your answer to 2dp`,
+                    answer: roundFloat((a**2+b**2+c**2+d**2+e**2)/5 - ((a+b+c+d+e)/5)**2, 2),qnum:5
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 100, 10);
+                b = getRandomFloat(1, 100, 10);
+                c = getRandomFloat(1, 100, 10);
+                d = getRandomFloat(1, 100, 10);
+                e = getRandomFloat(1, 100, 10);
+                return {question: `Find the variance of the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*) \n\n  give your answer to 2dp`,
+                    answer: roundFloat((a**2+b**2+c**2+d**2+e**2)/5 - ((a+b+c+d+e)/5)**2, 2),qnum:6
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 100, 10);
+                b = getRandomFloat(1, 100, 10);
+                c = getRandomFloat(1, 100, 10);
+                d = getRandomFloat(1, 100, 10);
+                e = getRandomFloat(1, 100, 10);
+                return {question: `Find the variance of the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*) \n\n  give your answer to 2dp`,
+                    answer: roundFloat((a**2+b**2+c**2+d**2+e**2)/5 - ((a+b+c+d+e)/5)**2, 2),qnum:7
+                }
+            },
+        ]
+    },
+    {
+        name: "Standard Deviation",
+        id: "standard-deviation",
+        topic: "stats",
         index: 2,
-        url: "",
-        similar: [],
-        question: () => {
-            center = getRandomInt(1, 100)
-            a = getRandomFloat(center - 5, center + 5, 10)
-            b = getRandomFloat(center - 5, center + 5, 10)
-            c = getRandomFloat(center - 5, center + 5, 10)
-            d = getRandomFloat(center - 5, center + 5, 10)
-            e = getRandomFloat(center - 5, center + 5, 10)
-            mean = (a+b+c+d+e)/5
-            de = e - mean
-            return {question: `${getRandomName} DATA THINGY HERE ${a}, ${b}, ${c} ${d}.\n The last DATA THINGY HERE was ${e}.\ncCalculate the devaition of the LAST DATATHINGY HERE in the dataset.`}
-        }
+        questions: [
+            () => {
+                a = getRandomFloat(1, 10, 1);
+                b = getRandomFloat(1, 10, 1);
+                c = getRandomFloat(1, 10, 1);
+                return {question: `Find the standard deviation of the dataset below. \n (*${a}*), (*${b}*), (*${c}*) \n\n  give your answer to 2d.p.`,
+                    answer: roundFloat(((a**2+b**2+c**2)/3 - ((a+b+c)/3)**2)**0.5, 2),qnum:0
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 10, 1);
+                b = getRandomFloat(1, 10, 1);
+                c = getRandomFloat(1, 10, 1);
+                return {question: `Find the standard deviation of the dataset below. \n (*${a}*), (*${b}*), (*${c}*) \n\n  give your answer to 2d.p.`,
+                    answer: roundFloat(((a**2+b**2+c**2)/3 - ((a+b+c)/3)**2)**0.5, 2),qnum:1
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 10, 1);
+                b = getRandomFloat(1, 10, 1);
+                c = getRandomFloat(1, 10, 1);
+                d = getRandomFloat(1, 10, 1);
+                e = getRandomFloat(1, 10, 1);
+                return {question: `Find the standard deviation of the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*) \n\n  give your answer to 2d.p.`,
+                    answer: roundFloat(((a**2+b**2+c**2+d**2+e**2)/5 - ((a+b+c+d+e)/5)**2)**0.5, 2),qnum:2
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 10, 1);
+                b = getRandomFloat(1, 10, 1);
+                c = getRandomFloat(1, 10, 1);
+                d = getRandomFloat(1, 10, 1);
+                e = getRandomFloat(1, 10, 1);
+                return {question: `Find the standard deviation of the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*) \n\n  give your answer to 2d.p.`,
+                    answer: roundFloat(((a**2+b**2+c**2+d**2+e**2)/5 - ((a+b+c+d+e)/5)**2)**0.5, 2),qnum:3
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 10, 10);
+                b = getRandomFloat(1, 10, 10);
+                c = getRandomFloat(1, 10, 10);
+                d = getRandomFloat(1, 10, 10);
+                e = getRandomFloat(1, 10, 10);
+                return {question: `Find the standard deviation of the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*) \n\n  give your answer to 2d.p.`,
+                    answer: roundFloat(((a**2+b**2+c**2+d**2+e**2)/5 - ((a+b+c+d+e)/5)**2)**0.5, 2),qnum:4
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 10, 10);
+                b = getRandomFloat(1, 10, 10);
+                c = getRandomFloat(1, 10, 10);
+                d = getRandomFloat(1, 10, 10);
+                e = getRandomFloat(1, 10, 10);
+                return {question: `Find the standard deviation of the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*) \n\n  give your answer to 2d.p.`,
+                    answer: roundFloat(((a**2+b**2+c**2+d**2+e**2)/5 - ((a+b+c+d+e)/5)**2)**0.5, 2),qnum:5
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 100, 10);
+                b = getRandomFloat(1, 100, 10);
+                c = getRandomFloat(1, 100, 10);
+                d = getRandomFloat(1, 100, 10);
+                e = getRandomFloat(1, 100, 10);
+                return {question: `Find the standard deviation of the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*) \n\n  give your answer to 2d.p.`,
+                    answer: roundFloat(((a**2+b**2+c**2+d**2+e**2)/5 - ((a+b+c+d+e)/5)**2)**0.5, 2),qnum:6
+                }
+            },
+            () => {
+                a = getRandomFloat(1, 100, 10);
+                b = getRandomFloat(1, 100, 10);
+                c = getRandomFloat(1, 100, 10);
+                d = getRandomFloat(1, 100, 10);
+                e = getRandomFloat(1, 100, 10);
+                return {question: `Find the standard deviation of the dataset below. \n (*${a}*), (*${b}*), (*${c}*), (*${d}*), (*${e}*) \n\n  give your answer to 2d.p.`,
+                    answer: roundFloat(((a**2+b**2+c**2+d**2+e**2)/5 - ((a+b+c+d+e)/5)**2)**0.5, 2),qnum:7
+                }
+            },
+        ]
+    },
+    {
+        name: "Comparative (scaled) Pie Charts",
+        id: "comparative-(scaled)-pie-charts",
+        topic: "stats",
+        index: 3,
+        questions: [
+            () => {
+                r1 = getRandomFloat(1, 20, 1);
+                r2 = getRandomFloat(1, 20, 1);
+                while (r1 == r2) {
+                    r2 = getRandomFloat(1, 20, 1);
+                }
+                multiple = getRandomInt(1, 10, 1);
+                f1 = r1**2 * multiple;
+                f2 = r2**2 * multiple;
+                return {question: `Pie Chart A has radius ${r1} and represents ${f1} people. \n Pie Chart B represents ${f2} people. \n What should the radius of Pie Chart B be?`,
+                    answer: r2,qnum:0
+                }
+            },
+            () => {
+                r1 = getRandomFloat(1, 20, 1);
+                r2 = getRandomFloat(1, 20, 1);
+                while (r1 == r2) {
+                    r2 = getRandomFloat(1, 20, 1);
+                }
+                multiple = getRandomFloat(1, 10, 1);
+                f1 = r1**2 * multiple;
+                f2 = r2**2 * multiple;
+                return {question: `Pie Chart A has radius ${r1} and represents ${f1} people. \n Pie Chart B represents ${f2} people. \n What should the radius of Pie Chart B be?`,
+                    answer: r2,qnum:1
+                }
+            },
+            () => {
+                r1 = getRandomFloat(1, 20, 1);
+                r2 = getRandomFloat(1, 20, 1);
+                while (r1 == r2) {
+                    r2 = getRandomFloat(1, 20, 1);
+                }
+                multiple = getRandomInt(1, 10) * 100;
+                f1 = r1**2 * multiple;
+                f2 = r2**2 * multiple;
+                return {question: `Pie Chart A has radius ${r1} and represents ${f1} people. \n Pie Chart B represents ${f2} people. \n What should the radius of Pie Chart B be?`,
+                    answer: r2,qnum:2
+                }
+            },
+            () => {
+                r1 = getRandomFloat(1, 20, 1);
+                r2 = getRandomFloat(1, 20, 1);
+                while (r1 == r2) {
+                    r2 = getRandomFloat(1, 20, 1);
+                }
+                multiple = getRandomInt(1, 10) * 100;
+                f1 = r1**2 * multiple;
+                f2 = r2**2 * multiple;
+                return {question: `Pie Chart A has radius ${r1} and represents ${f1} people. \n Pie Chart B represents ${f2} people. \n What should the radius of Pie Chart B be?`,
+                    answer: r2,qnum:3
+                }
+            },
+            () => {
+                r1 = getRandomFloat(1, 20, 1);
+                r2 = getRandomFloat(1, 20, 1);
+                while (r1 == r2) {
+                    r2 = getRandomFloat(1, 20, 1);
+                }
+                multiple = getRandomFloat(1, 10, 1);
+                f1 = r1**2 * multiple;
+                f2 = r2**2 * multiple;
+                return {question: `Pie Chart A has radius ${r1} and represents ${f1} people. \n Pie Chart B has a radius of ${r2}. \n How many people does Pie Chart B represent?`,
+                    answer: f2,qnum:4
+                }
+            },
+            () => {
+                r1 = getRandomFloat(1, 20, 1);
+                r2 = getRandomFloat(1, 20, 1);
+                while (r1 == r2) {
+                    r2 = getRandomFloat(1, 20, 1);
+                }
+                multiple = getRandomFloat(1, 10, 1);
+                f1 = r1**2 * multiple;
+                f2 = r2**2 * multiple;
+                return {question: `Pie Chart A has radius ${r1} and represents ${f1} people. \n Pie Chart B has a radius of ${r2}. \n How many people does Pie Chart B represent?`,
+                    answer: f2,qnum:5
+                }
+            },
+            () => {
+                r1 = getRandomFloat(1, 20, 1);
+                r2 = getRandomFloat(1, 20, 1);
+                while (r1 == r2) {
+                    r2 = getRandomFloat(1, 20, 1);
+                }
+                multiple = getRandomInt(1, 10) * 100;
+                f1 = r1**2 * multiple;
+                f2 = r2**2 * multiple;
+                return {question: `Pie Chart A has radius ${r1} and represents ${f1} people. \n Pie Chart B has a radius of ${r2}. \n How many people does Pie Chart B represent?`,
+                    answer: f2,qnum:6
+                }
+            },
+            () => {
+                r1 = getRandomFloat(1, 20, 1);
+                r2 = getRandomFloat(1, 20, 1);
+                while (r1 == r2) {
+                    r2 = getRandomFloat(1, 20, 1);
+                }
+                multiple = getRandomInt(1, 10) * 100;
+                f1 = r1**2 * multiple;
+                f2 = r2**2 * multiple;
+                return {question: `Pie Chart A has radius ${r1} and represents ${f1} people. \n Pie Chart B has a radius of ${r2}. \n How many people does Pie Chart B represent?`,
+                    answer: f2,qnum:7
+                }
+            },
+        ]
     }
 ]
